@@ -10,7 +10,7 @@ Take a list of domains from stdin. The script resolves each domain using dig and
 ## Usage
 
 ```bash
-cat subdomains.txt | scopecheck <SCOPE_FILE>
+▶ cat subdomains.txt | scopecheck <SCOPE_FILE>
 
 www.example.com
 xxx.example.com
