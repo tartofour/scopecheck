@@ -1,0 +1,24 @@
+#!/bin/bash
+
+display_help() {
+  echo -e "DESCRIPTION: Take a list of domains from stdin. The script resolves each domain using dig and check if resolved IPs are present in the SCOPE_FILE passed as argument. The script echoes in-scope subdomains.\n"
+  echo -e "USAGE: $0 SCOPE_FILE\n"   
+  echo "SCOPE_FILE FORMAT : "
+  echo "  One IP address per line.\n"
+}
+
+  if [ -z "$1" ]; then
+    display_help
+    exit 1
+  fi
+
+  ip_file=$1
+
+while read domain; do
+  dig_output=$(dig +short $domain)
+
+  if test -n "$dig_output" && grep -q "$dig_output" $ip_file; then
+    echo $domain
+  fi
+
+done
