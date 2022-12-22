@@ -1,24 +1,31 @@
-#!/bin/bash
+#!/usr/bin/python3
 
-display_help() {
-  echo -e "DESCRIPTION: Take a list of domains from stdin. The script resolves each domain using dig and check if resolved IPs are present in the SCOPE_FILE passed as argument. The script echoes in-scope subdomains.\n"
-  echo -e "USAGE: $0 SCOPE_FILE\n"   
-  echo "SCOPE_FILE FORMAT : "
-  echo "  One IP address per line.\n"
-}
+import socket
+import sys
+import threading
 
-  if [ -z "$1" ]; then
-    display_help
-    exit 1
-  fi
+if len(sys.argv) < 2:
+    print("Veuillez spécifier un fichier en argument")
+    sys.exit(1)
 
-  ip_file=$1
+try:
+    ip_file = open(sys.argv[1],"r").read()
+except:
+    print("Error loading IP file")
+    sys.exit(1)
 
-while read domain; do
-  dig_output=$(dig +short $domain)
+def resolve_subdomain(subdomain, ip_addresses):
 
-  if test -n "$dig_output" && grep -q "$dig_output" $ip_file; then
-    echo $domain
-  fi
+    try:
+        resolved_ip = socket.gethostbyname(subdomain)
+        if resolved_ip in ip_addresses:
+            print(subdomain)
+    except:
+        pass
 
-done
+for line in sys.stdin:
+    subdomain = line.strip()
+    thread = threading.Thread(target=resolve_subdomain, args=(subdomain, ip_file))
+    thread.start()
+
+thread.join()
