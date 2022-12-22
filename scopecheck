@@ -4,6 +4,14 @@ import socket
 import sys
 import threading
 
+def resolve_subdomain(subdomain, ip_addresses):
+    try:
+        resolved_ip = socket.gethostbyname(subdomain)
+        if resolved_ip in ip_addresses:
+            print(subdomain)
+    except:
+        pass
+
 if len(sys.argv) < 2:
     print("No file provided as argument.")
     sys.exit(1)
@@ -13,14 +21,6 @@ try:
 except:
     print("Error loading IP file")
     sys.exit(1)
-
-def resolve_subdomain(subdomain, ip_addresses):
-    try:
-        resolved_ip = socket.gethostbyname(subdomain)
-        if resolved_ip in ip_addresses:
-            print(subdomain)
-    except:
-        pass
 
 for line in sys.stdin:
     subdomain = line.strip()
