@@ -5,7 +5,7 @@ import sys
 import threading
 
 if len(sys.argv) < 2:
-    print("Veuillez spécifier un fichier en argument")
+    print("No file provided as argument.")
     sys.exit(1)
 
 try:
@@ -15,7 +15,6 @@ except:
     sys.exit(1)
 
 def resolve_subdomain(subdomain, ip_addresses):
-
     try:
         resolved_ip = socket.gethostbyname(subdomain)
         if resolved_ip in ip_addresses:
