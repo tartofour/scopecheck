@@ -4,11 +4,12 @@ import socket
 import sys
 import threading
 
-def resolve_subdomain(subdomain, ip_addresses):
+def resolve_fqdn(fqdn, scope):
     try:
-        resolved_ip = socket.gethostbyname(subdomain)
-        if resolved_ip in ip_addresses:
-            print(subdomain)
+        resolved_fqdn = socket.gethostbyname_ex(fqdn)
+        for ip in resolved_fqdn[2]:
+            if ip in scope:
+                print(fqdn)
     except:
         pass
 
@@ -23,8 +24,8 @@ except:
     sys.exit(1)
 
 for line in sys.stdin:
-    subdomain = line.strip()
-    thread = threading.Thread(target=resolve_subdomain, args=(subdomain, ip_file))
+    fqdn = line.strip()
+    thread = threading.Thread(target=resolve_fqdn, args=(fqdn, ip_file))
     thread.start()
 
 thread.join()

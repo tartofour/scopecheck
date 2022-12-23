@@ -8,7 +8,7 @@ Take a list of FQDNs from stdin. The script resolves each FQDN and check if reso
 ## Usage
 
 ```bash
-▶ cat subdomains.txt | scopecheck <SCOPE_FILE>
+▶ cat fqdns.txt | scopecheck <SCOPE_FILE>
 
 www.example.com
 xxx.example.com
