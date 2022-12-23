@@ -3,7 +3,7 @@
 - [ ] Add help menu
 
 ## Description
-Take a list of domains from stdin. The script resolves each domain using dig and check if resolved IPs are present in the SCOPE_FILE passed as argument. The script echoes in-scope subdomains.
+Take a list of FQDNs from stdin. The script resolves each FQDN and check if resolved IP addresses are present in the SCOPE_FILE. In-scope FQDNs are printed to stdout.
 
 ## Usage
 
