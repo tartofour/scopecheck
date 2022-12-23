@@ -3,7 +3,7 @@
 - [ ] Add help menu
 
 ## Description
-Take a list of FQDNs from stdin. The script resolves each FQDN and check if resolved IP addresses are present in the SCOPE_FILE. In-scope FQDNs are printed to stdout.
+Take a list of FQDNs from stdin. The script resolves each FQDN and check if resolved IP addresses are present in the SCOPE_FILE. In-scope FQDNs are sent to stdout.
 
 ## Usage
 
