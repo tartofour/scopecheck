@@ -4,7 +4,7 @@ import socket
 import sys
 import threading
 
-def resolve_fqdn(fqdn, scope):
+def print_inscope_fqdn(fqdn, scope):
     try:
         resolved_fqdn = socket.gethostbyname_ex(fqdn)
         for ip in resolved_fqdn[2]:
@@ -25,7 +25,7 @@ except:
 
 for line in sys.stdin:
     fqdn = line.strip()
-    thread = threading.Thread(target=resolve_fqdn, args=(fqdn, ip_file))
+    thread = threading.Thread(target=print_inscope_fqdn, args=(fqdn, ip_file))
     thread.start()
 
 thread.join()
