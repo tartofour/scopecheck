@@ -1,6 +1,7 @@
 # scopecheck
 
 - [ ] Add help menu
+- [ ] Possibility to specify IP range
 
 ## Description
 Take a list of FQDNs from stdin. The script resolves each FQDN and check if resolved IP addresses are present in the SCOPE_FILE. In-scope FQDNs are sent to stdout.
